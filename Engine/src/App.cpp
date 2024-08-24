@@ -3,8 +3,12 @@
 #include <iostream>
 #include <windowsx.h>
 
+#include "Renderer/DirectX12/Debug/DXGIDebug.h"
+
+
 namespace Engine {
 
+	//callback to execute windows msgs (Win32 API stuff)
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
 
 		switch (msg) {
@@ -32,6 +36,7 @@ namespace Engine {
 	}
 	bool App::init()
 	{
+		//setup window class
 		WNDCLASS wndClass = {};
 		wndClass.lpszClassName = L"GeneralWindowClass";
 		wndClass.style = 0;
@@ -46,13 +51,14 @@ namespace Engine {
 
 		RegisterClass(&wndClass);
 
-		//Create the window...return to Lparam later
+		//Create the window
 		pWindowHandle = CreateWindow(L"GeneralWindowClass", L"Dx12_EngineWindow", WS_OVERLAPPEDWINDOW, 200, 200, 1280, 720, 0, 0, 0, this);
 
 		if (!pWindowHandle) {
 			return false;
 		}
 
+		//show and update window
 		ShowWindow(pWindowHandle, SW_SHOWDEFAULT);
 		UpdateWindow(pWindowHandle);
 
@@ -64,7 +70,7 @@ namespace Engine {
 	void App::update()
 	{
 		MSG message;
-
+		//handle msgs
 		while (PeekMessage(&message, 0, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&message);
 			DispatchMessage(&message);
@@ -74,13 +80,16 @@ namespace Engine {
 
 	void App::OnCreate(HWND hwnd)
 	{
+		//create the renderer 
 		std::cout << "Created the actual window" << std::endl;
+		pRenderer.init(hwnd);
 	}
 
 	void App::OnDestroy()
 	{
 		std::cout << "Closed the window - shutting down application" << std::endl;
-		//pIsRunning = false;
+		DXGIDebug::Get().getLiveObjects();
+		pIsRunning = false;
 	}
 
 }

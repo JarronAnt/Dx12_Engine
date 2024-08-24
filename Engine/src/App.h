@@ -2,6 +2,7 @@
 
 #include "EngineMin.h"
 #include <Windows.h>
+#include "Renderer/Renderer.h"
 
 namespace Engine {
 	class DX_API App
@@ -19,5 +20,6 @@ namespace Engine {
 	private:
 		bool pIsRunning = false;
 		HWND pWindowHandle = nullptr;
+		Renderer pRenderer;
 	};
 }

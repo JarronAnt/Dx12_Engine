@@ -51,6 +51,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,11 +79,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Renderer\DirectX12\Debug\DXGIDebug.h" />
+    <ClInclude Include="src\Renderer\DirectX12\Debug\D12Debug.h" />
+    <ClInclude Include="src\Renderer\DirectX12\DXGI\DXGIAdapter.h" />
+    <ClInclude Include="src\Renderer\DirectX12\DXGI\DXGIFactory.h" />
+    <ClInclude Include="src\Helpers.h" />
+    <ClInclude Include="src\Renderer\DirectX12\Base\D12Device.h" />
+    <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\EngineMin.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Renderer\DirectX12\Debug\DXGIDebug.cpp" />
+    <ClCompile Include="src\Renderer\DirectX12\Debug\D12Debug.cpp" />
+    <ClCompile Include="src\Renderer\DirectX12\DXGI\DXGIAdapter.cpp" />
+    <ClCompile Include="src\Renderer\DirectX12\DXGI\DXGIFactory.cpp" />
+    <ClCompile Include="src\Renderer\DirectX12\Base\D12Device.cpp" />
+    <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
