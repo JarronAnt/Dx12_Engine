@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "App.h"
-#include <stdio.h>
+#include <iostream>
 #include <windowsx.h>
 
 namespace Engine {
@@ -9,17 +9,27 @@ namespace Engine {
 
 		switch (msg) {
 		case WM_NCCREATE: {
-			printf("TEST");
+			LPCREATESTRUCT param = reinterpret_cast<LPCREATESTRUCT>(lparam);
+			App* pointer = reinterpret_cast<App*>(param->lpCreateParams);
+			SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pointer));
+			std::cout << "Sent create message" << std::endl;
 			break;
 		}
-		case WM_CLOSE:
-			DestroyWindow(hwnd);
+		case WM_CREATE: {
+			App* pointer = reinterpret_cast<App*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+			pointer->OnCreate(hwnd);
 			break;
 		}
-
+		case WM_DESTROY: {
+			App* pointer = reinterpret_cast<App*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+			pointer->OnDestroy();
+			PostQuitMessage(0);
+			break;
+		}
+			
+		}
 		return DefWindowProc(hwnd, msg, wparam, lparam);
 	}
-	
 	bool App::init()
 	{
 		WNDCLASS wndClass = {};
@@ -43,7 +53,7 @@ namespace Engine {
 			return false;
 		}
 
-		ShowWindow(pWindowHandle, SW_SHOW);
+		ShowWindow(pWindowHandle, SW_SHOWDEFAULT);
 		UpdateWindow(pWindowHandle);
 
 		//is running flag
@@ -53,6 +63,24 @@ namespace Engine {
 
 	void App::update()
 	{
+		MSG message;
+
+		while (PeekMessage(&message, 0, 0, 0, PM_REMOVE)) {
+			TranslateMessage(&message);
+			DispatchMessage(&message);
+
+		}
+	}
+
+	void App::OnCreate(HWND hwnd)
+	{
+		std::cout << "Created the actual window" << std::endl;
+	}
+
+	void App::OnDestroy()
+	{
+		std::cout << "Closed the window - shutting down application" << std::endl;
+		//pIsRunning = false;
 	}
 
 }

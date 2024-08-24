@@ -13,6 +13,9 @@ namespace Engine {
 		inline bool isRunning() { return pIsRunning; }
 		void update();
 
+		void OnCreate(HWND hwnd);
+		void OnDestroy();
+
 	private:
 		bool pIsRunning = false;
 		HWND pWindowHandle = nullptr;
