@@ -21,7 +21,7 @@
     <ClInclude Include="src\EngineMin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TempClass.h">
+    <ClInclude Include="src\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TempClass.cpp">
+    <ClCompile Include="src\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

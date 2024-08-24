@@ -1,7 +1,7 @@
 #pragma once
 
 
-#ifdef ENGINE_EXPORT
+#ifdef ENGINE_EXPORTS
 
 #define DX_API __declspec(dllexport)
 
